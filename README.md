@@ -9,6 +9,7 @@ de Sistemas Operacionais da FURB, 2026/2.
 - First Fit
 - Best Fit
 - Worst Fit
+- Next Fit
 
 ## Tecnologias
 

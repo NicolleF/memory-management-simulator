@@ -63,7 +63,7 @@ Aplicando o algoritmo Best Fit:
 
 ## 6. Implementação no projeto
 
-**Status:** Planejado para a V1.
+**Status:** Implementado no núcleo da V1.
 
 A implementação deverá seguir a arquitetura definida em `ARCHITECTURE.md`.
 Detalhes da implementação, decisões técnicas e testes serão adicionados após o desenvolvimento do algoritmo.

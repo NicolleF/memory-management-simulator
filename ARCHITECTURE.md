@@ -43,6 +43,7 @@ O simulador deverá permitir:
 
 * First Fit
 * Best Fit
+* Next Fit (planejado)
 * Worst Fit
 
 ---
@@ -67,6 +68,7 @@ O simulador deverá permitir:
 └─────────┘ ├──────────────┤
             │ First Fit    │
             │ Best Fit     │
+            │ Next Fit     │
             │ Worst Fit    │
             └──────────────┘
 ```
@@ -123,10 +125,16 @@ EstrategiaDeAlocacao
        │
        ├── FirstFit
        ├── BestFit
+       ├── NextFit
        └── WorstFit
 ```
 
 Cada estratégia será responsável por determinar em qual região da memória um processo deverá ser alocado.
+
+A escolha da implementação é centralizada em `AllocationFactory`.
+O simulador informa um `AllocationType` (`FIRST_FIT`, `BEST_FIT`, `NEXT_FIT` ou `WORST_FIT`)
+e recebe uma `AllocationStrategy`, que pode ser passada a `Memory.alocar`.
+Assim, o código que coordena a simulação não precisa instanciar as estratégias concretas.
 
 ---
 
@@ -171,7 +179,7 @@ Resultado da Alocação
 
 ---
 
-## 7. Estrutura de pastas da V1
+## 7. Estrutura conceitual da V1
 
 ```text
 src/
@@ -180,16 +188,18 @@ src/
 │   │   ├── Memory
 │   │   ├── MemoryBlock
 │   │   └── Process
-│   │
+│   ├── enums/
+│   │   └── AllocationType
+│   ├── factories/
+│   │   └── AllocationFactory
 │   ├── strategies/
 │   │   ├── AllocationStrategy
-│   │   ├── FirstFit
-│   │   ├── BestFit
-│   │   └── WorstFit
-│   │
+│   │   ├── AllocationFirstFit
+│   │   ├── AllocationBestFit
+│   │   ├── AllocationNextFit
+│   │   └── AllocationWorstFit
 │   └── simulation/
 │       └── MemorySimulator
-│
 └── ui/
-    └── ...
+   └── ...
 ```
