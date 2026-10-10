@@ -31,7 +31,19 @@ public class Memory {
     }
 
     public boolean alocarNoBloco(Process process, MemoryBlock block) {
-        throw new UnsupportedOperationException("Alocação em bloco ainda não implementada.");
+        Objects.requireNonNull(process, "O processo é obrigatório.");
+        Objects.requireNonNull(block, "O bloco é obrigatório.");
+        int index = blocks.indexOf(block);
+        if (index < 0 || !block.isFree() || block.size() < process.size()) {
+            return false;
+        }
+
+        blocks.set(index, new MemoryBlock(block.start(), process.size(), process));
+        int remainingSize = block.size() - process.size();
+        if (remainingSize > 0) {
+            blocks.add(index + 1, new MemoryBlock(block.start() + process.size(), remainingSize, null));
+        }
+        return true;
     }
 
     public boolean liberar(String processId) {
