@@ -16,10 +16,17 @@ de Sistemas Operacionais da FURB, 2026/2.
 - Java 21
 - Spring Boot 4.1.1
 - Maven
+- Angular 21 (frontend)
+
+## Estrutura do monorepo
+
+- `src/`: backend Spring Boot e núcleo do simulador.
+- `frontend/`: protótipo visual Angular estático, com dados ilustrativos e opções de tema e identidade visual.
+- `docs/`: especificações e [plano de desenvolvimento do frontend e integração](docs/roadmap-monorepo-angular.md).
 
 ## Executar
 
-Com Java 21 e Maven instalados, execute na raiz do projeto:
+Com Java 21 e Maven instalados, inicie o backend na raiz do repositório:
 
 ```bash
 mvn spring-boot:run
@@ -30,3 +37,12 @@ Para executar os testes:
 ```bash
 mvn test
 ```
+
+Para iniciar o frontend, abra outro terminal na pasta `frontend/`:
+
+```bash
+npm install
+npm start
+```
+
+O frontend é uma prévia visual estática: os dados são ilustrativos, os controles de simulação estão desativados e ainda não há conexão com a API.

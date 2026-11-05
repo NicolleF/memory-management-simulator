@@ -1,4 +1,4 @@
-# Worst Fit 
+# Worst Fit
 
 ## 1. Visão geral
 
@@ -53,11 +53,22 @@ Os blocos C e D atendem à solicitação.
 
 ## 6. Implementação no projeto
 
-**Status:** Planejado para a V1.
+**Status:** Implementado no núcleo da V1.
 
-A implementação deverá seguir a arquitetura definida em `ARCHITECTURE.md`.
+`AllocationWorstFit` implementa `AllocationStrategy` e pode ser selecionado pela
+`AllocationFactory` com `AllocationType.WORST_FIT`. A busca percorre os blocos em
+ordem de endereço e seleciona o maior bloco livre suficiente; em caso de empate,
+mantém o primeiro bloco, de menor endereço. A alocação retorna `true` quando
+consegue atender ao processo e `false` quando não há bloco suficiente. A sobra
+do bloco escolhido permanece disponível para outras alocações.
 
-Detalhes da implementação, decisões técnicas e testes serão adicionados após o desenvolvimento do algoritmo.
+```java
+AllocationStrategy strategy = AllocationFactory.create(AllocationType.WORST_FIT);
+boolean allocated = memory.alocar(process, strategy);
+```
+
+A implementação foi integrada à factory existente. Os testes podem cobrir a
+seleção do maior bloco, blocos insuficientes e ocupados, empate, falha e sobra.
 
 ## 7. Referências
 

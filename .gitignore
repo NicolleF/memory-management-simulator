@@ -1,5 +1,11 @@
 HELP.md
 target/
+frontend/node_modules/
+frontend/dist/
+frontend/.angular/
+frontend/coverage/
+frontend/.env
+frontend/.env.*
 .mvn/wrapper/maven-wrapper.jar
 !.mvn/wrapper/maven-wrapper.properties
 .idea/
