@@ -22,7 +22,7 @@ de Sistemas Operacionais da FURB, 2026/2.
 
 - `src/`: backend Spring Boot e núcleo do simulador.
 - `frontend/`: protótipo visual Angular estático, com dados ilustrativos e opções de tema e identidade visual.
-- `docs/`: especificações e [plano de desenvolvimento do frontend e integração](docs/roadmap-monorepo-angular.md).
+- `docs/`: [contrato da API REST](docs/api-rest.md), especificações e [plano de desenvolvimento](docs/roadmap-monorepo-angular.md).
 
 ## Executar
 
