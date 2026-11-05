@@ -47,6 +47,39 @@ public class Memory {
     }
 
     public boolean liberar(String processId) {
-        throw new UnsupportedOperationException("Liberação ainda não implementada.");
+        Objects.requireNonNull(processId, "O identificador do processo é obrigatório.");
+        int index = -1;
+        for (int i = 0; i < blocks.size(); i++) {
+            Process process = blocks.get(i).process();
+            if (process != null && process.id().equals(processId)) {
+                index = i;
+                break;
+            }
+        }
+        if (index < 0) {
+            return false;
+        }
+
+        MemoryBlock released = blocks.get(index);
+        blocks.set(index, new MemoryBlock(released.start(), released.size(), null));
+        if (index > 0 && blocks.get(index - 1).isFree()) {
+            MemoryBlock previous = blocks.get(index - 1);
+            released = new MemoryBlock(previous.start(), previous.size() + released.size(), null);
+            blocks.set(index - 1, released);
+            blocks.remove(index);
+            index--;
+        }
+        if (index + 1 < blocks.size() && blocks.get(index + 1).isFree()) {
+            MemoryBlock next = blocks.get(index + 1);
+            MemoryBlock current = blocks.get(index);
+            blocks.set(index, new MemoryBlock(current.start(), current.size() + next.size(), null));
+            blocks.remove(index + 1);
+        }
+        return true;
+    }
+
+    public void reiniciar() {
+        blocks.clear();
+        blocks.add(new MemoryBlock(0, totalSize, null));
     }
 }
